@@ -1,20 +1,20 @@
 # Mongoose-Essentials
 All you need to start learning mongoose.
 
-## Install mongoose
+### Install mongoose
 
 npm install mongoose
 
-## Require mongoose
+### Require mongoose
 
 const mongoose = require('mongoose');
 
-## Connect to the local server
+### Connect to the local server
 
 mongoose.connect('mongodb://127.0.0.1:27017/fruitsDB', {useNewUrlParser: true})
   .then(() => console.log('Connected!'));
 
-## Create a schema
+### Create a schema
 
 const fruitSchema = new mongoose.Schema({
     name: {
@@ -25,19 +25,19 @@ const fruitSchema = new mongoose.Schema({
     review: String
 });
 
-## Create a model on the specified schema
+### Create a model on the specified schema
 
 const Fruit = mongoose.model("Fruit", fruitSchema);
 
-## Create an object on the model of fruit
+### Create an object on the model of fruit
 
 const fruit = new Fruit({
-    // name: "Apple",
+    name: "Apple",
     rating: 7,
     review: "Pretty good"
 });
 
-## Insert only object/document in to the database
+### Insert only object/document in to the database
 
 fruit.save().catch(err => {
     console.error('Error executing find:', err.name);
@@ -55,14 +55,14 @@ const banana = new Fruit({
     review: "Pretty fabulous"
 });
 
-## Save many objects/documents in to the database
+### Save many objects/documents in to the database
 
 Fruit.insertMany([kiwi, banana]).catch(err => {
     console.log(err);
     mongoose.connection.close();
 });
 
-## Show data of the specified collection/model
+### Show data of the specified collection/model
 
 Fruit.find({})
 .then(users => {
@@ -70,35 +70,35 @@ Fruit.find({})
   users.forEach(function(user){
     console.log(user.name);
   });
-
-  // Close the connection
 })
 .catch(err => {
   console.error('Error executing find:', err);
 });
 
-## Update only object/document of the specified collection/model on the specified condition
+### Update only object/document of the specified collection/model on the specified condition
 
 Fruit.updateOne({name: "Apple"}, {name: "Dragon Fruit"}).catch(function(err){
     console.log(err);
 });
 
+### Update many object/document of the specified collection/model on the specified condition
+
 People.updateMany({name: "Apple"}, {name: "Dragon Fruit"}).catch(function(err){
     console.log(err);
 });
 
-## Delete only object/document of the specified collection/model on the specified condition
+### Delete many object/document of the specified collection/model on the specified condition
 
 Fruit.deleteOne({name: "Dragon Fruit"}).catch(function(err){
     console.log(err);
 });
 
-## Delete Many object/document of the specified collection/model on the specified condition
+### Delete many object/document of the specified collection/model on the specified condition
 
 Fruit.deleteMany({name: "Apple"}).catch(function(err){
     console.log(err);
 });
 
-## Close connection
+### Close connection
 
 mongoose.connection.close()
